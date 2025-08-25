@@ -1,0 +1,14 @@
+//
+// Created by Kehinde Adeoso on 8/25/25.
+//
+
+#ifndef KEHINDES_GAMEBOY_EMULATOR_GAMEBOYCONTEXT_H
+#define KEHINDES_GAMEBOY_EMULATOR_GAMEBOYCONTEXT_H
+
+
+class GameboyContext
+{
+};
+
+
+#endif //KEHINDES_GAMEBOY_EMULATOR_GAMEBOYCONTEXT_H
