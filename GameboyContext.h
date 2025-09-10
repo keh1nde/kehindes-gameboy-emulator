@@ -9,7 +9,22 @@
 #include <cstdint>
 #include <stack>
 
-struct Cartridge; // ROM Banking, External RAM, Memory Bank Controller registers
+struct Cartridge // ROM Banking, External RAM, Memory Bank Controller registers
+{
+    using BYTE = uint8_t;
+    using WORD = uint16_t;
+    enum class MBCKind {None, MBC1, MBC2, MBC3, MBC5, HuC1, HuC3, Unknown};
+
+    // Start of Memory Bank Implementation. Make sure the the following is set before the emulator runs.
+    MBCKind kind = MBCKind::Unknown;
+    int cm_RAM_SIZE;
+    int cm_RAM_BANK_AMT;
+    int cm_ROM_SIZE;
+    int cm_ROM_BANK_AMT;
+
+    std::vector<BYTE> cm_MBCROM;
+    std::vector<BYTE> cm_MBCRAM;
+};
 struct PPU; // Picture Processing Unit, owns VRAM, OAM, PPU regs
 struct APU; // Audio registers
 struct Timers; // DIV/TIMA/TMA/TAC
@@ -19,8 +34,8 @@ struct Interrupts; // Interrupt Flag and Interrupt Enable | IF (FF0F) + IE (FFFF
 
 
 struct GBBus {
-    using BYTE = u_int8_t;
-    using WORD = u_int16_t;
+    using BYTE = uint8_t;
+    using WORD = uint16_t;
 
     // Devices
     Cartridge* cartridge;
@@ -40,7 +55,7 @@ struct GBBus {
     inline int WorkRamBankD() const;
 
 
-    uint8_t read8(uint16_t addr);
+    BYTE read8(uint16_t addr);
     void    write8(uint16_t addr, uint8_t data);
 };
 
